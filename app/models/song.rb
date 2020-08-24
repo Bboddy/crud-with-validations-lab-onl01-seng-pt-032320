@@ -2,15 +2,17 @@ class Song < ActiveRecord::Base
   validates :title, presence: true
   validates :artist_name, presence: true
   validates :released, inclusion: { in: [true, false] }
-  validate :not_repeated
+  #validate :not_repeated
   validate :correct_release
+  validates :title, uniqueness: { scope: :year,
+    message: "Cannot be repeated by the same artist in the same year" }
   
-  def not_repeated
-    @song = Song.find_by title: :title, release_year: :release_year
-    if @song
-      errors.add(:title, "Cannot be repeated by the same artist in the same year")
-    end
-  end
+  # def not_repeated
+  #   @song = Song.find_by title: :title, release_year: :release_year
+  #   if @song
+  #     errors.add(:title, "Cannot be repeated by the same artist in the same year")
+  #   end
+  # end
   
   def correct_release
     year = Date.today.year
