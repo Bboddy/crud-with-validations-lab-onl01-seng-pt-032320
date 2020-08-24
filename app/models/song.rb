@@ -7,6 +7,7 @@ class Song < ActiveRecord::Base
   
   def not_repeated
     @song = Song.find_by title: :title, release_year: :release_year
+    binding.pry
     if @song
       errors.add(:title, "Cannot be repeated by the same artist in the same year")
     end
