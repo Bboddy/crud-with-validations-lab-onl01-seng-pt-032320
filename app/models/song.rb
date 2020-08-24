@@ -14,11 +14,12 @@ class Song < ActiveRecord::Base
   
   def correct_release
     year = Date.today.year
+    binding.pry
     if release_year && release_year >= year
       #binding.pry
       errors.add(:release_year, "Must be less than or equal to the current year")
     elsif released && title == nil 
-      binding.pry
+      
       errors.add(:title, "Must not be blank if released")
     end
   end
