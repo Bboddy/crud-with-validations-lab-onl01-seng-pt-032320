@@ -4,7 +4,7 @@ class Song < ActiveRecord::Base
   validates :released, inclusion: { in: [true, false] }
   #validate :not_repeated
   validate :correct_release
-  validates :title, uniqueness: { scope: :year, message: "Cannot be repeated by the same artist in the same year" }
+  validates :title, uniqueness: { scope: :release_year, message: "Cannot be repeated by the same artist in the same year" }
   
   # def not_repeated
   #   @song = Song.find_by title: :title, release_year: :release_year
